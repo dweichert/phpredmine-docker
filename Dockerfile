@@ -19,6 +19,7 @@ RUN mkdir -p -m 0777 /var/www/localhost/htdocs/logs/apache2handler/ && \
 
 RUN sed 's|/var/www/localhost/htdocs|/var/www/localhost/htdocs/public|g' /etc/apache2/httpd.conf >/etc/apache2/httpd-new.conf && \
     echo "ServerName localhost" >> /etc/apache2/httpd-new.conf && \
+    echo "SetEnvIf X-Forwarded-Proto "https" HTTPS=on" >> /etc/apache2/httpd-new.conf && \
     mv /etc/apache2/httpd-new.conf /etc/apache2/httpd.conf
 
 EXPOSE 80
